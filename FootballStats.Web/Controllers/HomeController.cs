@@ -12,12 +12,7 @@ namespace FootballStats.Web.Controllers
     {
         public ActionResult Index()
         {
-            var unitOfWork = new UnitOfWork();
-            unitOfWork.FootballMatchRepository.Save(new FootballMatch
-            {
-                Name = "asd"
-            });
-            unitOfWork.Commit();
+            var matches = new UnitOfWork().FootballMatchRepository.GetAll().ToArray();
 
             return View();
         }

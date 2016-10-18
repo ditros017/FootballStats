@@ -57,6 +57,8 @@
     <Compile Include="DataConfig.cs" />
     <Compile Include="FootballStatsDbContext.cs" />
     <Compile Include="Infrastructure\DbContextExtensions.cs" />
+    <Compile Include="Infrastructure\DbInitializerManager.cs" />
+    <Compile Include="Infrastructure\FootballStatsTestDbInitializer.cs" />
     <Compile Include="Infrastructure\Repository.cs" />
     <Compile Include="Infrastructure\UnitOfWork.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
