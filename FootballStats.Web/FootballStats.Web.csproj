@@ -236,7 +236,18 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
+    <ProjectReference Include="..\FootballStats.Common\FootballStats.Common.csproj">
+      <Project>{9a2c3692-750e-4f0b-a291-884e56847568}</Project>
+      <Name>FootballStats.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FootballStats.Data\FootballStats.Data.csproj">
+      <Project>{5301d6c0-c323-4e2a-9724-5c8a48c5e627}</Project>
+      <Name>FootballStats.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FootballStats.Domain\FootballStats.Domain.csproj">
+      <Project>{75c5f416-83cf-4333-9d4f-da00209139b2}</Project>
+      <Name>FootballStats.Domain</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -244,6 +255,9 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="packages.config" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

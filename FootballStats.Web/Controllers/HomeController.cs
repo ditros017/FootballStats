@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using FootballStats.Data.Infrastructure;
+using FootballStats.Domain;
 
 namespace FootballStats.Web.Controllers
 {
@@ -10,6 +12,13 @@ namespace FootballStats.Web.Controllers
     {
         public ActionResult Index()
         {
+            var unitOfWork = new UnitOfWork();
+            unitOfWork.FootballMatchRepository.Save(new FootballMatch
+            {
+                Name = "asd"
+            });
+            unitOfWork.Commit();
+
             return View();
         }
 

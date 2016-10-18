@@ -1,7 +1,9 @@
-﻿using Microsoft.Owin;
+﻿using FootballStats.Web;
+using Microsoft.Owin;
 using Owin;
 
-[assembly: OwinStartupAttribute(typeof(FootballStats.Web.Startup))]
+[assembly: OwinStartup(typeof(Startup))]
+
 namespace FootballStats.Web
 {
     public partial class Startup
