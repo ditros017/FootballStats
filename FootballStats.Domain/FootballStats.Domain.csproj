@@ -41,9 +41,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Coach.cs" />
     <Compile Include="EntityBase.cs" />
     <Compile Include="FootballMatch.cs" />
+    <Compile Include="FootballMatchPlayerFoul.cs" />
+    <Compile Include="FootballMatchPlayerGoal.cs" />
+    <Compile Include="FootballMatchPlayer.cs" />
+    <Compile Include="FootballMatchReferee.cs" />
+    <Compile Include="FootballMatchTeam.cs" />
+    <Compile Include="PersonBase.cs" />
+    <Compile Include="Player.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Referee.cs" />
+    <Compile Include="Team.cs" />
+    <Compile Include="Tournament.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FootballStats.Common\FootballStats.Common.csproj">

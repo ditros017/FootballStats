@@ -10,15 +10,17 @@ namespace FootballStats.Data
 {
     public class FootballStatsDbContext : DbContext
     {
+        public DbSet<Tournament> Tournaments { get; set; }
         public DbSet<FootballMatch> FootballMatches { get; set; }
-        //public DbSet<Component> Components { get; set; }
-        //public DbSet<BlastingCap> BlastingCaps { get; set; }
-        //public DbSet<Inhibitor> Inhibitors { get; set; }
-        //public DbSet<Site> Sites { get; set; }
-        //public DbSet<IntermediateGrille> IntermediateGrilles { get; set; }
-        //public DbSet<TechnicalSamplingResult> TechnicalSamplingResults { get; set; }
-        //public DbSet<PressingScheme> PressingSchemes { get; set; }
-        //public DbSet<Filling> Fillings { get; set; }
+        public DbSet<Team> Teams { get; set; }
+        public DbSet<Player> Players { get; set; }
+        public DbSet<Referee> Referees { get; set; }
+        public DbSet<Coach> Coaches { get; set; }
+        public DbSet<FootballMatchReferee> FootballMatchReferees { get; set; }
+        public DbSet<FootballMatchPlayer> FootballMatchPlayers { get; set; }
+        public DbSet<FootballMatchPlayerGoal> FootballMatchPlayerGoals { get; set; }
+        public DbSet<FootballMatchPlayerFoul> FootballMatchPlayerFouls { get; set; }
+        public DbSet<FootballMatchTeam> FootballMatchTeams { get; set; }
 
         public FootballStatsDbContext() : base(DataConfig.FootballStatsDbConnectionString)
         {
