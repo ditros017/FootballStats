@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using FootballStats.Data.Infrastructure;
-using FootballStats.Web.Models.Tournament;
+using FootballStats.Web.Models.Player;
 
 namespace FootballStats.Web.Controllers
 {
@@ -17,11 +17,11 @@ namespace FootballStats.Web.Controllers
         {
             return View("~/Views/Players/List.cshtml", new ListModel
             {
-                Tournaments = _unitOfWork.TournamentRepository.GetAll(t => new ListModel.Tournament
+                Players = _unitOfWork.PlayerRepository.GetAll(p => new ListModel.Player
                 {
-                    Id = t.Id,
-                    Name = t.Name,
-                    FootballMatchCount = t.FootballMatches.Count
+                    Id = p.Id,
+                    Name = p.LastName + " " + p.FirstName,
+                    TeamName = p.Team.Name
                 }).ToArray()
             });
         }
@@ -29,7 +29,21 @@ namespace FootballStats.Web.Controllers
         [HttpGet]
         public ActionResult Details(int id)
         {
-            return new EmptyResult();
+            var model = _unitOfWork.PlayerRepository.GetById(id, p => new DetailsModel
+            {
+                Id = p.Id,
+                FirstName = p.FirstName,
+                LastName = p.LastName,
+                MiddleName = p.MiddleName,
+                TeamId = p.TeamId,
+                TeamName = p.Team.Name,
+                DateOfBirth = p.DateOfBirth,
+                FootballMatchCount = p.FootballMatchPlayers.Count(mp => mp.IsStarted || mp.EnterTime.HasValue)
+            });
+
+            model.FootballMatchGoalCount = _unitOfWork.FootballMatchPlayerGoalRepository.Count(g => g.FootballMatchPlayer.PlayerId == model.Id);
+
+            return View("~/Views/Players/Details.cshtml", model);
         }
     }
 }

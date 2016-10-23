@@ -181,9 +181,19 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Coach\DetailsModel.cs" />
     <Compile Include="Models\FootballMatch\DetailsModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Player\DetailsModel.cs" />
+    <Compile Include="Models\Player\ListModel.cs" />
+    <Compile Include="Models\Referee\DetailsModel.cs" />
+    <Compile Include="Models\Referee\ListModel.cs" />
+    <Compile Include="Models\Referee\MatchListModel.cs" />
+    <Compile Include="Models\Team\DetailsModel.cs" />
+    <Compile Include="Models\Team\MatchListModel.cs" />
+    <Compile Include="Models\Team\ListModel.cs" />
+    <Compile Include="Models\Team\PlayerListModel.cs" />
     <Compile Include="Models\Tournament\DetailsModel.cs" />
     <Compile Include="Models\Tournament\ListModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -214,6 +224,8 @@
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -262,6 +274,14 @@
     <Content Include="Views\Teams\List.cshtml" />
     <Content Include="Views\Tournaments\Details.cshtml" />
     <Content Include="Views\FootballMatches\Details.cshtml" />
+    <Content Include="Views\Teams\Details.cshtml" />
+    <Content Include="Views\Teams\Partials\PlayerList.cshtml" />
+    <Content Include="Views\Teams\Partials\MatchListModel.cshtml" />
+    <Content Include="Views\Coaches\Details.cshtml" />
+    <Content Include="Views\Players\Details.cshtml" />
+    <Content Include="Views\Referees\Details.cshtml" />
+    <Content Include="Views\Referees\List.cshtml" />
+    <Content Include="Views\Referees\Partials\MatchListModel.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FootballStats.Common\FootballStats.Common.csproj">

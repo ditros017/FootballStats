@@ -1,0 +1,38 @@
+﻿@using FootballStats.Common
+@model FootballStats.Web.Models.Referee.MatchListModel
+
+<h4>Матчи</h4>
+
+<table class="table">
+    <tr>
+        <th>
+            Команды
+        </th>
+        <th>
+            Турнир
+        </th>
+        <th>
+            Стадия
+        </th>
+        <th>
+        </th>
+    </tr>
+
+    @foreach (var footballMatch in Model.FootballMatches)
+    {
+        <tr>
+            <td>
+                @footballMatch.ToString()
+            </td>
+            <td>
+                @footballMatch.TournamentName
+            </td>
+            <td>
+                @footballMatch.StageType.ToString().SplitUpperCase()
+            </td>
+            <td>
+                @Html.ActionLink("Выбрать", "Details", "FootballMatches", new { footballMatch.Id, footballMatch.TournamentId }, null)
+            </td>
+        </tr>
+    }
+</table>

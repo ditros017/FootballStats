@@ -4,7 +4,6 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using FootballStats.Data.Infrastructure;
-using FootballStats.Domain;
 using FootballStats.Web.Models.FootballMatch;
 
 namespace FootballStats.Web.Controllers
@@ -12,12 +11,6 @@ namespace FootballStats.Web.Controllers
     public class FootballMatchesController : Controller
     {
         private readonly UnitOfWork _unitOfWork = new UnitOfWork();
-
-        [HttpGet]
-        public ActionResult List(int tournamentId)
-        {
-            return null;
-        }
 
         public ActionResult Details(int id)
         {

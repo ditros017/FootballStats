@@ -1,4 +1,4 @@
-﻿@model FootballStats.Web.Models.Tournament.ListModel
+﻿@model FootballStats.Web.Models.Player.ListModel
 @{
     ViewBag.Title = "Игроки";
 }
@@ -17,17 +17,17 @@
         </th>
     </tr>
 
-    @foreach (var tournament in Model.Tournaments)
+    @foreach (var player in Model.Players)
     {
         <tr>
             <td>
-                @tournament.Name
+                @player.Name
             </td>
             <td>
-                @tournament.FootballMatchCount
+                @player.TeamName
             </td>
             <td>
-                @Html.ActionLink("Выбрать", "Details", new {tournament.Id})
+                @Html.ActionLink("Выбрать", "Details", new {player.Id})
                 @if (User.IsInRole("admin"))
                 {
                     <span>

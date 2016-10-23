@@ -10,5 +10,7 @@ namespace FootballStats.Domain
     {
         public int TeamId { get; set; }
         public Team Team { get; set; }
+
+        public ICollection<FootballMatchPlayer> FootballMatchPlayers { get; set; }
     }
 }

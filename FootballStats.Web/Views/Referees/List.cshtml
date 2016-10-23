@@ -1,0 +1,34 @@
+﻿@model FootballStats.Web.Models.Referee.ListModel
+@{
+    ViewBag.Title = "Судьи";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            ФИО
+        </th>
+        <th>
+            Тип
+        </th>
+        <th>
+        </th>
+    </tr>
+
+    @foreach (var referee in Model.Referees)
+    {
+        <tr>
+            <td>
+                @referee.Name
+            </td>
+            <td>
+                @referee.Type
+            </td>
+            <td>
+                @Html.ActionLink("Выбрать", "Details", new {referee.Id})
+            </td>
+        </tr>
+    }
+</table>

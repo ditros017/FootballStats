@@ -1,4 +1,4 @@
-﻿@model FootballStats.Web.Models.Tournament.ListModel
+﻿@model FootballStats.Web.Models.Team.ListModel
 @{
     ViewBag.Title = "Команды";
 }
@@ -8,26 +8,38 @@
 <table class="table">
     <tr>
         <th>
-            ФИО
+            Название
         </th>
         <th>
-            Команда
+            Страна
+        </th>
+        <th>
+            Город
+        </th>
+        <th>
+            Количество игроков
         </th>
         <th>
         </th>
     </tr>
 
-    @foreach (var tournament in Model.Tournaments)
+    @foreach (var team in Model.Teams)
     {
         <tr>
             <td>
-                @tournament.Name
+                @team.Name
             </td>
             <td>
-                @tournament.FootballMatchCount
+                @team.Country
             </td>
             <td>
-                @Html.ActionLink("Выбрать", "Details", new {tournament.Id})
+                @team.City
+            </td>
+            <td>
+                @team.PlayerCount
+            </td>
+            <td>
+                @Html.ActionLink("Выбрать", "Details", new {team.Id})
                 @if (User.IsInRole("admin"))
                 {
                     <span>

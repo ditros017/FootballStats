@@ -1,0 +1,59 @@
+﻿@model FootballStats.Web.Models.Team.DetailsModel
+@{
+    ViewBag.Title = $"Команда: {Model.Name}";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<div>
+    <dl class="dl-horizontal">
+        <dt>
+            Страна:
+        </dt>
+        <dd>
+            @Model.Country
+        </dd>
+
+        <dt>
+            Город:
+        </dt>
+        <dd>
+            @Model.City
+        </dd>
+
+        <dt>
+            Главный тренер:
+        </dt>
+        <dd>
+            @Html.ActionLink(Model.Coach.Name, "Details", "Coaches", new {Model.Coach.Id}, null)
+        </dd>
+
+        <dt>
+            Количество игроков:
+        </dt>
+        <dd>
+            @Model.PlayerCount
+            @Ajax.ActionLink("Список игроков", "PlayerList", "Teams", new {Model.Id}, new AjaxOptions
+            {
+                UpdateTargetId = "players",
+                InsertionMode = InsertionMode.Replace,
+                HttpMethod = "GET"
+            })
+        </dd>
+
+        <dt>
+            Количество сыгранных матчей:
+        </dt>
+        <dd>
+            @Model.FootballMatchCount @Ajax.ActionLink("Список матчей", "MatchList", "Teams", new {Model.Id}, new AjaxOptions {UpdateTargetId = "footballMatches", InsertionMode = InsertionMode.Replace, HttpMethod = "GET"})
+        </dd>
+    </dl>
+</div>
+
+<div id="players">
+
+</div>
+
+<div id="footballMatches">
+
+</div>

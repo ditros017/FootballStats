@@ -1,0 +1,45 @@
+﻿@model FootballStats.Web.Models.Coach.DetailsModel
+@{
+    ViewBag.Title = $"Тренер: {Model}";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<div>
+    <dl class="dl-horizontal">
+        <dt>
+            Фамилия:
+        </dt>
+        <dd>
+            @Model.LastName
+        </dd>
+
+        <dt>
+            Имя:
+        </dt>
+        <dd>
+            @Model.FirstName
+        </dd>
+
+        <dt>
+            Отчество:
+        </dt>
+        <dd>
+            @Model.FirstName
+        </dd>
+        
+        <dt>
+            Дата рождения:
+        </dt>
+        <dd>
+            @Model.DateOfBirth.ToString("d MMM yyyy")
+        </dd>
+
+        <dt>
+            Команда:
+        </dt>
+        <dd>
+            @Html.ActionLink(Model.CoachingTeam.Name, "Details", "Teams", new {Model.CoachingTeam.Id}, null)
+        </dd>
+    </dl>
+</div>

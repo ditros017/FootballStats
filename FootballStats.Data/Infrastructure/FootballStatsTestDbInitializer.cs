@@ -185,7 +185,7 @@ namespace FootballStats.Data.Infrastructure
 
                 context.FootballMatchPlayers.Add(footballMatchPlayer);
 
-                if (index % 3 == 0)
+                if (index % 3 == 0 && index != getAwayIndex)
                 {
                     context.SaveChanges();
 
@@ -198,7 +198,7 @@ namespace FootballStats.Data.Infrastructure
                     });
                 }
 
-                if (random.Next(1, 11) == index)
+                if (random.Next(1, 11) == index && index != getAwayIndex)
                 {
                     context.SaveChanges();
 
@@ -215,6 +215,7 @@ namespace FootballStats.Data.Infrastructure
             }
 
             index = 1;
+            var enterIndex = random.Next(1, 7);
             foreach (var playerId in playerIds.Skip(11).ToArray())
             {
                 var footballMatchPlayer = new FootballMatchPlayer
@@ -222,13 +223,13 @@ namespace FootballStats.Data.Infrastructure
                     FootballMatchId = footballMatchId,
                     PlayerId = playerId,
                     IsStarted = false,
-                    EnterTime = index == 3 ? TimeSpan.FromMinutes(minuteToSubstitute) : (TimeSpan?)null,
+                    EnterTime = index == enterIndex ? TimeSpan.FromMinutes(minuteToSubstitute) : (TimeSpan?)null,
                     CreatedAt = DateTime.UtcNow
                 };
 
                 context.FootballMatchPlayers.Add(footballMatchPlayer);
 
-                if (index == 3)
+                if (random.Next(1, 7) == index && index == enterIndex)
                 {
                     context.SaveChanges();
 
@@ -241,7 +242,7 @@ namespace FootballStats.Data.Infrastructure
                     });
                 }
 
-                if (random.Next(1, 7) == index)
+                if (random.Next(1, 7) == index && index == enterIndex)
                 {
                     context.SaveChanges();
 

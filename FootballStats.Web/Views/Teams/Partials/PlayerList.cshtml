@@ -1,0 +1,43 @@
+﻿@model FootballStats.Web.Models.Team.PlayerListModel
+
+<h4>Игроки</h4>
+
+<table class="table">
+    <tr>
+        <th>
+            Фамилия, Имя
+        </th>
+        <th>
+            Дата рождения
+        </th>
+        <th>
+            Количество сыгранных матчей
+        </th>
+        <th>
+            Количество голов
+        </th>
+        <th>
+        </th>
+    </tr>
+
+    @foreach (var player in Model.Players)
+    {
+        <tr>
+            <td>
+                @player.Name
+            </td>
+            <td>
+                @player.DateOfBirth.ToString("d MMM yyyy")
+            </td>
+            <td>
+                @player.FootballMatchCount
+            </td>
+            <td>
+                @player.FootballMatchGoalCount
+            </td>
+            <td>
+                @Html.ActionLink("Выбрать", "Details", "Players", new { player.Id }, null)
+            </td>
+        </tr>
+    }
+</table>

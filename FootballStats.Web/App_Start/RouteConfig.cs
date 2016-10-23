@@ -74,6 +74,18 @@ namespace FootballStats.Web
             );
 
             routes.MapRoute(
+                name: "RefereeList",
+                url: "Referees",
+                defaults: new { controller = "Referees", action = "List" }
+            );
+
+            routes.MapRoute(
+                name: "RefereeDetails",
+                url: "Referees/{id}",
+                defaults: new { controller = "Referees", action = "Details" }
+            );
+
+            routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new {controller = "Home", action = "Index", id = UrlParameter.Optional}

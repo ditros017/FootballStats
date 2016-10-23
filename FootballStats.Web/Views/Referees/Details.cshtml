@@ -1,0 +1,56 @@
+﻿@model FootballStats.Web.Models.Referee.DetailsModel
+@{
+    ViewBag.Title = $"Судья: {Model}";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<div>
+    <dl class="dl-horizontal">
+        <dt>
+            Фамилия:
+        </dt>
+        <dd>
+            @Model.LastName
+        </dd>
+
+        <dt>
+            Имя:
+        </dt>
+        <dd>
+            @Model.FirstName
+        </dd>
+
+        <dt>
+            Отчество:
+        </dt>
+        <dd>
+            @Model.FirstName
+        </dd>
+
+        <dt>
+            Дата рождения:
+        </dt>
+        <dd>
+            @Model.DateOfBirth.ToString("d MMM yyyy")
+        </dd>
+
+        <dt>
+            Количество сыгранных матчей:
+        </dt>
+        <dd>
+            @Model.FootballMatchCount
+            @Ajax.ActionLink("Список матчей", "MatchList", "Referees", new { Model.Id }, new AjaxOptions
+            {
+                UpdateTargetId = "footballMatches",
+                InsertionMode = InsertionMode.Replace,
+                HttpMethod = "GET"
+            })
+        </dd>
+
+    </dl>
+</div>
+
+<div id="footballMatches">
+    
+</div>

@@ -18,9 +18,9 @@ namespace FootballStats.Data.Infrastructure
         private Repository<FootballMatchPlayerGoal> _footballMatchPlayerGoalRepository;
         private Repository<FootballMatchPlayer> _footballMatchPlayerRepository;
         private Repository<Team> _teamRepository;
-        //private Repository<PressingScheme> _pressingSchemeRepository;
-        //private Repository<Product> _productRepository;
-        //private Repository<Site> _siteRepository;
+        private Repository<Player> _playerRepository;
+        private Repository<Coach> _coachRepository;
+        private Repository<Referee> _refereeRepository;
         //private Repository<TechnicalSamplingResult> _technicalSamplingResultRepository;
 
         public Repository<FootballMatch> FootballMatchRepository => _footballMatchRepository ?? (_footballMatchRepository = new Repository<FootballMatch>(_dbContext));
@@ -28,9 +28,9 @@ namespace FootballStats.Data.Infrastructure
         public Repository<FootballMatchPlayerGoal> FootballMatchPlayerGoalRepository => _footballMatchPlayerGoalRepository ?? (_footballMatchPlayerGoalRepository = new Repository<FootballMatchPlayerGoal>(_dbContext));
         public Repository<FootballMatchPlayer> FootballMatchPlayerRepository => _footballMatchPlayerRepository ?? (_footballMatchPlayerRepository = new Repository<FootballMatchPlayer>(_dbContext));
         public Repository<Team> TeamRepository => _teamRepository ?? (_teamRepository = new Repository<Team>(_dbContext));
-        //public Repository<PressingScheme> PressingSchemeRepository => _pressingSchemeRepository ?? (_pressingSchemeRepository = new Repository<PressingScheme>(_dbContext));
-        //public Repository<Product> ProductRepository => _productRepository ?? (_productRepository = new Repository<Product>(_dbContext));
-        //public Repository<Site> SiteRepository => _siteRepository ?? (_siteRepository = new Repository<Site>(_dbContext));
+        public Repository<Player> PlayerRepository => _playerRepository ?? (_playerRepository = new Repository<Player>(_dbContext));
+        public Repository<Coach> CoachRepository => _coachRepository ?? (_coachRepository = new Repository<Coach>(_dbContext));
+        public Repository<Referee> RefereeRepository => _refereeRepository ?? (_refereeRepository = new Repository<Referee>(_dbContext));
         //public Repository<TechnicalSamplingResult> TechnicalSamplingResultRepository => _technicalSamplingResultRepository ?? (_technicalSamplingResultRepository = new Repository<TechnicalSamplingResult>(_dbContext));
 
         public void Commit()
