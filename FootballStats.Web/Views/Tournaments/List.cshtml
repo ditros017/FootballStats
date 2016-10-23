@@ -1,0 +1,47 @@
+﻿@model FootballStats.Web.Models.Tournament.ListModel
+@{
+    ViewBag.Title = "Турниры";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            Название турнира
+        </th>
+        <th>
+            Количество сыгранных матчей
+        </th>
+        <th>
+        </th>
+    </tr>
+
+    @foreach (var tournament in Model.Tournaments)
+    {
+        <tr>
+            <td>
+                @tournament.Name
+            </td>
+            <td>
+                @tournament.FootballMatchCount
+            </td>
+            <td>
+                @Html.ActionLink("Выбрать", "Details", new {tournament.Id})
+                @if (User.IsInRole("admin"))
+                {
+                    <span>
+                            @*@Html.ActionLink("Edit", "Edit", new { id = tournament.Tariff_Code }) |
+                                @Html.ActionLink("Delete", "Delete", new { id = tournament.Tariff_Code })*@
+                        </span>
+                }@*@Ajax.ActionLink("Список опций",
+                        "GetOptions", new { id = tournament.Tariff_Code }, new AjaxOptions
+                        {
+                            UpdateTargetId = "tariffOptions",
+                            InsertionMode = InsertionMode.Replace,
+                            HttpMethod = "GET"
+                        })*@
+            </td>
+        </tr>
+    }
+</table>

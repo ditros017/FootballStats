@@ -1,0 +1,23 @@
+﻿@{
+    Layout = "~/Views/Shared/_BasicLayout.cshtml";
+}
+
+<div class="row">
+    <div class="col-xs-2">
+        <ul class="nav nav-sidebar">
+            <li>
+                @Html.ActionLink("Турниры", "List", "Tournaments")
+            </li>
+            <li>
+                @Html.ActionLink("Команды", "List", "Teams")
+            </li>
+            <li>
+                @Html.ActionLink("Игроки", "List", "Players")
+            </li>
+            <li><a href="#">Судьи</a></li>
+        </ul>
+    </div>
+    <div class="col-xs-10">
+        @RenderBody()
+    </div>
+</div>

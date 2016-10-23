@@ -1,0 +1,45 @@
+﻿@using FootballStats.Common
+@using FootballStats.Domain
+@model FootballStats.Web.Models.Tournament.DetailsModel
+@{
+    ViewBag.Title = $"Турнир - {Model.Name}";
+
+    var stages = EnumExtensions.GetItems<FootballMatchStageType>();
+}
+
+<h1>
+    @ViewBag.Title
+</h1>
+
+<div>
+    @foreach (var stage in stages)
+    {
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                @stage.ToString().SplitUpperCase()
+            </div>
+
+            @{
+                var footballMatches = Model.FootballMatches.Where(m => m.StageType == stage).ToArray();
+
+                if (footballMatches.Any())
+                {
+                    <ul class="list-group">
+                        @foreach (var footballMatch in Model.FootballMatches.Where(m => m.StageType == stage).ToArray())
+                        {
+                            <li class="list-group-item">
+                                @Html.ActionLink(footballMatch.ToString(), "Details", "FootballMatches", new { footballMatch.Id, TournamentId = Model.Id }, null)
+                            </li>
+                        }
+                    </ul>
+                }
+                else
+                {
+                    <div class="panel-body">
+                        Нет матчей
+                    </div>
+                }
+            }
+        </div>
+    }
+</div>

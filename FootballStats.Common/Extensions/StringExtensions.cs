@@ -5,7 +5,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
-namespace FootballStats.Common.Extensions
+namespace FootballStats.Common
 {
     public static class StringExtensions
     {

@@ -6,11 +6,11 @@ using System.Web.Mvc;
 
 namespace FootballStats.Web.Controllers
 {
-    public class HomeController : Controller
+    public class RefereesController : Controller
     {
-        public ActionResult Index()
+        public ActionResult Details(int id)
         {
-            return View();
+            return null;
         }
     }
 }

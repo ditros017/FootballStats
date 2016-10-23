@@ -1,0 +1,133 @@
+﻿@using FootballStats.Domain
+@using FootballStats.Web.Models.FootballMatch
+
+@model DetailsModel
+@{
+    ViewBag.Title = $"{Model.TournamentName}: {Model.Name}";
+
+    var mainReferee = Model.Referees.Single(r => r.Type == RefereeType.Main);
+}
+
+<h1>
+    @Html.ActionLink(Model.TournamentName, "Details", "Tournaments", new { Id = Model.TournamentId }, null): @Model.Name
+</h1>
+
+<div class="col-md-12">
+    <div class="panel panel-info">
+        <div class="panel-heading">
+            Главный судья
+        </div>
+        <div class="panel-body">
+            @Html.ActionLink(mainReferee.Name, "Details", "Referees", new { mainReferee.Id }, null)
+        </div>
+    </div>
+    
+    <div class="panel panel-success">
+        <div class="panel-heading">
+            Боковые судьи
+        </div>
+        <ul class="list-group">
+            @foreach (var referee in Model.Referees.Where(r => r.Type == RefereeType.Linesman))
+            {
+                <li class="list-group-item">
+                    @Html.ActionLink(referee.Name, "Details", "Referees", new { referee.Id }, null)
+                </li>
+            }
+        </ul>
+    </div>
+</div>
+
+<div class="col-md-6">
+    @Team(Model.Teams.Single(t => !t.IsGuest))
+</div>
+
+<div class="col-md-6">
+    @Team(Model.Teams.Single(t => t.IsGuest))
+</div>
+
+@helper Team(DetailsModel.Team team)
+{
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            Команда (@(team.IsGuest ? "В гостях" : "Дома"))
+        </div>
+        <div class="panel-body">
+            @Html.ActionLink(team.Name, "Details", "Teams", new { team.Id }, null)
+        </div>
+
+        <div class="panel-heading">
+            Главный тренер
+        </div>
+        <div class="panel-body">
+            @Html.ActionLink(team.Coach.Name, "Details", "Coaches", new {team.Coach.Id}, null)
+        </div>
+
+        <div class="panel-heading">
+            Основной состав
+        </div>
+        <ul class="list-group">
+            @foreach (var player in team.Players.Where(p => p.IsStarted))
+            {
+                <li class="list-group-item">
+                    @Html.ActionLink(player.Name, "Details", "Players", new {player.Id}, null) @Player(player)
+                </li>
+            }
+        </ul>
+
+        <div class="panel-heading">
+            Запасные
+        </div>
+        <ul class="list-group">
+            @foreach (var player in team.Players.Where(p => !p.IsStarted))
+            {
+                <li class="list-group-item">
+                    @Html.ActionLink(player.Name, "Details", "Players", new {player.Id}, null) @Player(player)
+                </li>
+            }
+        </ul>
+    </div>
+}
+
+@helper Player(DetailsModel.Player player)
+{
+    @Goals(player)
+    @Fouls(player)
+    @Substitution(player)
+}
+
+@helper Fouls(DetailsModel.Player player)
+{
+    foreach (var foul in player.Fouls)
+    {
+        <span>
+            <span class="glyphicon glyphicon-tag@(foul.Type == FoulType.RedCard ? "s" : null)"></span> @foul.ToString()
+        </span>
+    }
+}
+
+@helper Goals(DetailsModel.Player player)
+{
+    foreach (var goal in player.Goals)
+    {
+        <span>
+            <span class="glyphicon @(goal.Type == GoalType.Game ? "glyphicon glyphicon-fire" : "glyphicon glyphicon-screenshot")"></span> @goal.ToString()
+        </span>
+    }
+}
+
+@helper Substitution(DetailsModel.Player player)
+{
+    if (player.GetAwayTime.HasValue)
+    {
+        <span>
+            <span class="glyphicon glyphicon-log-out"></span> @($"{player.GetAwayTime.Value.TotalMinutes}'")
+        </span>
+    }
+
+    if (player.EnterTime.HasValue)
+    {
+        <span>
+            <span class="glyphicon glyphicon-log-in"></span> @($"{player.EnterTime.Value.TotalMinutes}'")
+        </span>
+    }
+}
