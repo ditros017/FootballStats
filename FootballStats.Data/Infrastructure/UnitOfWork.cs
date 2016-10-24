@@ -21,6 +21,9 @@ namespace FootballStats.Data.Infrastructure
         private Repository<Coach> _coachRepository;
         private Repository<Referee> _refereeRepository;
         private Repository<User> _userRepository;
+        private Repository<FootballMatchTeam> _footballMatchTeamRepository;
+        private Repository<FootballMatchPlayerFoul> _footballMatchPlayerFoulRepository;
+        private Repository<FootballMatchReferee> _footballMatchRefereeRepository;
 
         public Repository<FootballMatch> FootballMatchRepository => _footballMatchRepository ?? (_footballMatchRepository = new Repository<FootballMatch>(_dbContext));
         public Repository<Tournament> TournamentRepository => _tournamentRepository ?? (_tournamentRepository = new Repository<Tournament>(_dbContext));
@@ -31,6 +34,9 @@ namespace FootballStats.Data.Infrastructure
         public Repository<Coach> CoachRepository => _coachRepository ?? (_coachRepository = new Repository<Coach>(_dbContext));
         public Repository<Referee> RefereeRepository => _refereeRepository ?? (_refereeRepository = new Repository<Referee>(_dbContext));
         public Repository<User> UserRepository => _userRepository ?? (_userRepository = new Repository<User>(_dbContext));
+        public Repository<FootballMatchTeam> FootballMatchTeamRepository => _footballMatchTeamRepository ?? (_footballMatchTeamRepository = new Repository<FootballMatchTeam>(_dbContext));
+        public Repository<FootballMatchPlayerFoul> FootballMatchPlayerFoulRepository => _footballMatchPlayerFoulRepository ?? (_footballMatchPlayerFoulRepository = new Repository<FootballMatchPlayerFoul>(_dbContext));
+        public Repository<FootballMatchReferee> FootballMatchRefereeRepository => _footballMatchRefereeRepository ?? (_footballMatchRefereeRepository = new Repository<FootballMatchReferee>(_dbContext));
 
         public void Commit()
         {

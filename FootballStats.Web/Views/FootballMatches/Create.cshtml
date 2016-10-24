@@ -1,0 +1,80 @@
+﻿@using FootballStats.Common
+@using FootballStats.Domain
+@model FootballStats.Web.Models.FootballMatch.CreateModel
+@{
+    ViewBag.Title = "Создание матча";
+}
+
+<h2>@ViewBag.Title</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true, "", new {@class = "text-danger"})
+        
+        <div class="form-group">
+            @Html.LabelFor(model => model.TournamentId, "Турнир", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.TournamentId, Model.Tournaments.Select(t => new SelectListItem { Text = t.Name, Value = t.Id.ToString() }), new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.TournamentId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.StageType, "Стадия турнира", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.StageType, EnumExtensions.GetItems<FootballMatchStageType>().Select(t => new SelectListItem { Value = ((int)t).ToString(), Text = t.ToString() }), new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.StageType, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        
+        <div class="form-group">
+            @Html.LabelFor(model => model.HomeTeamId, "Команда хозяев", new {@class = "control-label col-md-2"})
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.HomeTeamId, Model.Teams.Select(t => new SelectListItem { Text = t.Name, Value = t.Id.ToString() }), new {@class = "form-control"})
+                @Html.ValidationMessageFor(model => model.HomeTeamId, "", new {@class = "text-danger"})
+            </div>
+        </div>
+        
+        <div class="form-group">
+            @Html.LabelFor(model => model.GuestTeamId, "Команда гостей", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.GuestTeamId, Model.Teams.Select(t => new SelectListItem { Text = t.Name, Value = t.Id.ToString() }), new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.GuestTeamId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.MainRefereeId, "Главный судья", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.MainRefereeId, Model.Referees.Where(r => r.Type == RefereeType.Main).Select(r => new SelectListItem { Text = r.Name, Value = r.Id.ToString() }), new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.MainRefereeId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.FirstLinesmanRefereeId, "Первый боковой судья", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.FirstLinesmanRefereeId, Model.Referees.Where(r => r.Type == RefereeType.Linesman).Select(r => new SelectListItem { Text = r.Name, Value = r.Id.ToString() }), new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.FirstLinesmanRefereeId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.SecondLinesmanRefereeId, "Второй боковой судья", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.SecondLinesmanRefereeId, Model.Referees.Where(r => r.Type == RefereeType.Linesman).Select(r => new SelectListItem { Text = r.Name, Value = r.Id.ToString() }), new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.SecondLinesmanRefereeId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Создать" class="btn btn-default"/>
+            </div>
+        </div>
+    </div>
+}

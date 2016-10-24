@@ -27,7 +27,7 @@ namespace FootballStats.Web
 
             routes.MapRoute(
                 name: "FootballMatchList",
-                url: "Tournaments/{tournamentId}/FootballMatches",
+                url: "FootballMatches",
                 defaults: new { controller = "FootballMatches", action = "List" }
             );
 

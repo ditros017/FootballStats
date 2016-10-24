@@ -150,7 +150,9 @@
     <Compile Include="Models\Coach\CreateModel.cs" />
     <Compile Include="Models\Coach\ListModel.cs" />
     <Compile Include="Models\Coach\DetailsModel.cs" />
+    <Compile Include="Models\FootballMatch\CreateModel.cs" />
     <Compile Include="Models\FootballMatch\DetailsModel.cs" />
+    <Compile Include="Models\FootballMatch\ListModel.cs" />
     <Compile Include="Models\Player\EditModel.cs" />
     <Compile Include="Models\Player\CreateModel.cs" />
     <Compile Include="Models\Player\DetailsModel.cs" />
@@ -248,6 +250,8 @@
     <Content Include="Views\Teams\Edit.cshtml" />
     <Content Include="Views\Tournaments\Edit.cshtml" />
     <Content Include="Views\Tournaments\Create.cshtml" />
+    <Content Include="Views\FootballMatches\List.cshtml" />
+    <Content Include="Views\FootballMatches\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FootballStats.Common\FootballStats.Common.csproj">

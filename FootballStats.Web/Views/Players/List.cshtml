@@ -6,7 +6,10 @@
 
 <h2>@ViewBag.Title</h2>
 
-@Html.ActionLink("Создать", "Create")
+@if (Request.IsAuthenticated && User.Identity.GetUserName() == "admin")
+{
+    @Html.ActionLink("Создать", "Create")
+}
 
 <table class="table">
     <tr>

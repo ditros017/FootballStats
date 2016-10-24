@@ -1,51 +1,48 @@
 ﻿@using Microsoft.AspNet.Identity
-@model FootballStats.Web.Models.Tournament.ListModel
+@model FootballStats.Web.Models.FootballMatch.ListModel
 @{
-    ViewBag.Title = "Турниры";
+    ViewBag.Title = "Матчи";
 }
 
 <h2>@ViewBag.Title</h2>
 
-@if (Request.IsAuthenticated && User.Identity.GetUserName() == "admin")
-{
-    @Html.ActionLink("Создать", "Create")
-}
+@Html.ActionLink("Создать", "Create")
 
 <table class="table">
     <tr>
         <th>
-            Название турнира
+            Название
         </th>
         <th>
-            Количество сыгранных матчей
+            Турнир
         </th>
         <th>
         </th>
     </tr>
 
-    @foreach (var tournament in Model.Tournaments)
+    @foreach (var footballMatch in Model.FootballMatches)
     {
         <tr>
             <td>
-                @tournament.Name
+                @footballMatch.Name
             </td>
             <td>
-                @tournament.FootballMatchCount
+                @footballMatch.TournamentName
             </td>
             <td>
                 @if (Request.IsAuthenticated)
                 {
-                    @Html.ActionLink("Выбрать", "Details", new { tournament.Id })
+                    @Html.ActionLink("Выбрать", "Details", new { footballMatch.Id })
                     if (User.Identity.GetUserName() == "admin")
                     {
                         <text>
                             |
                         </text>
-                        @Html.ActionLink("Редактировать", "Edit", new { tournament.Id })
+                        @Html.ActionLink("Редактировать", "Edit", new { footballMatch.Id })
                         <text>
                             |
                         </text>
-                        <a data-id="@tournament.Id" href="javascript:void(0)" class="delete">Удалить</a>
+                        <a data-id="@footballMatch.Id" href="javascript:void(0)" class="delete">Удалить</a>
                     }
                 }
             </td>
@@ -59,11 +56,11 @@
             .on("click",
                 function(event) {
                     var target = $(event.target);
-                    var tournamentId = target.attr("data-id");
+                    var footballMatchId = target.attr("data-id");
                     $.ajax({
                         url: "@Url.Action("Delete")",
                         type: 'post',
-                        data: { id: tournamentId },
+                        data: { id: footballMatchId },
                             success: function () {
                                 target.closest("tr").remove();
                             }
