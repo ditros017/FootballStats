@@ -55,6 +55,7 @@
     <Compile Include="Referee.cs" />
     <Compile Include="Team.cs" />
     <Compile Include="Tournament.cs" />
+    <Compile Include="User.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FootballStats.Common\FootballStats.Common.csproj">

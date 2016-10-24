@@ -21,6 +21,7 @@ namespace FootballStats.Data
         public DbSet<FootballMatchPlayerGoal> FootballMatchPlayerGoals { get; set; }
         public DbSet<FootballMatchPlayerFoul> FootballMatchPlayerFouls { get; set; }
         public DbSet<FootballMatchTeam> FootballMatchTeams { get; set; }
+        public DbSet<User> Users { get; set; }
 
         public FootballStatsDbContext() : base(DataConfig.FootballStatsDbConnectionString)
         {

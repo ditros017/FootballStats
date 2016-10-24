@@ -1,28 +1,36 @@
-﻿@{
+﻿@using FootballStats.Domain
+@{
     Layout = "~/Views/Shared/_BasicLayout.cshtml";
 }
 
 <div class="row">
-    <div class="col-xs-2">
-        <ul class="nav nav-sidebar">
-            <li>
-                @Html.ActionLink("Турниры", "List", "Tournaments")
-            </li>
-            <li>
-                @Html.ActionLink("Команды", "List", "Teams")
-            </li>
-            <li>
-                @Html.ActionLink("Игроки", "List", "Players")
-            </li>
-            <li>
-                @Html.ActionLink("Судьи", "List", "Referees")
-            </li>
-            <li>
-                @Html.ActionLink("Тренеры", "List", "Coaches")
-            </li>
-        </ul>
-    </div>
-    <div class="col-xs-10">
+    @if (User.IsInRole(UserRole.Admin.ToString()))
+    {
+        <div class="col-xs-2">
+            <ul class="nav nav-sidebar">
+                <li>
+                    @Html.ActionLink("Турниры", "List", "Tournaments")
+                </li>
+                <li>
+                    @Html.ActionLink("Команды", "List", "Teams")
+                </li>
+                <li>
+                    @Html.ActionLink("Игроки", "List", "Players")
+                </li>
+                <li>
+                    @Html.ActionLink("Судьи", "List", "Referees")
+                </li>
+                <li>
+                    @Html.ActionLink("Тренеры", "List", "Coaches")
+                </li>
+            </ul>
+        </div>
+        <div class="col-xs-10">
+            @RenderBody()
+        </div>
+    }
+    else
+    {
         @RenderBody()
-    </div>
+    }
 </div>

@@ -9,6 +9,5 @@ namespace FootballStats.Domain
 {
     public class Coach : PersonBase
     {
-        public bool asd { get; set; }
     }
 }

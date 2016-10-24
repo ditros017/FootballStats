@@ -18,6 +18,19 @@ namespace FootballStats.Data.Infrastructure
             var referees = AddReferees(context);
 
             AddFootballMatches(context, tournamentIds, teamsPlayerIds, referees);
+            AddAdminUser(context);
+        }
+
+        private static void AddAdminUser(FootballStatsDbContext context)
+        {
+            context.Users.Add(new User
+            {
+                Name = "admin",
+                Password = "admin",
+                Role = UserRole.Admin,
+                CreatedAt = DateTime.UtcNow
+            });
+            context.SaveChanges();
         }
 
         private static Dictionary<int, IEnumerable<int>> AddPlayers(FootballStatsDbContext context, IEnumerable<int> teamIds)
@@ -185,7 +198,7 @@ namespace FootballStats.Data.Infrastructure
 
                 context.FootballMatchPlayers.Add(footballMatchPlayer);
 
-                if (index % 3 == 0 && index != getAwayIndex)
+                if (index%3 == 0 && index != getAwayIndex)
                 {
                     context.SaveChanges();
 
@@ -206,7 +219,7 @@ namespace FootballStats.Data.Infrastructure
                     {
                         FootballMatchPlayerId = footballMatchPlayer.Id,
                         Time = TimeSpan.FromMinutes(random.Next(1, index == getAwayIndex ? minuteToSubstitute : 90)),
-                        Type = index % 4 == 0 ? GoalType.Penalty : GoalType.Game,
+                        Type = index%4 == 0 ? GoalType.Penalty : GoalType.Game,
                         CreatedAt = DateTime.UtcNow
                     });
                 }
@@ -223,7 +236,7 @@ namespace FootballStats.Data.Infrastructure
                     FootballMatchId = footballMatchId,
                     PlayerId = playerId,
                     IsStarted = false,
-                    EnterTime = index == enterIndex ? TimeSpan.FromMinutes(minuteToSubstitute) : (TimeSpan?)null,
+                    EnterTime = index == enterIndex ? TimeSpan.FromMinutes(minuteToSubstitute) : (TimeSpan?) null,
                     CreatedAt = DateTime.UtcNow
                 };
 
