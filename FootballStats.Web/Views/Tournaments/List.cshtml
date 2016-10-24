@@ -1,9 +1,12 @@
-﻿@model FootballStats.Web.Models.Tournament.ListModel
+﻿@using Microsoft.AspNet.Identity
+@model FootballStats.Web.Models.Tournament.ListModel
 @{
     ViewBag.Title = "Турниры";
 }
 
 <h2>@ViewBag.Title</h2>
+
+@Html.ActionLink("Создать", "Create")
 
 <table class="table">
     <tr>
@@ -30,8 +33,39 @@
                 @if (Request.IsAuthenticated)
                 {
                     @Html.ActionLink("Выбрать", "Details", new { tournament.Id })
+                    if (User.Identity.GetUserName() == "admin")
+                    {
+                        <text>
+                            |
+                        </text>
+                        @Html.ActionLink("Редактировать", "Edit", new { tournament.Id })
+                        <text>
+                            |
+                        </text>
+                        <a data-id="@tournament.Id" href="javascript:void(0)" class="delete">Удалить</a>
+                    }
                 }
             </td>
         </tr>
     }
 </table>
+
+<script>
+    $(function() {
+        $("a.delete")
+            .on("click",
+                function(event) {
+                    var target = $(event.target);
+                    var tournamentId = target.attr("data-id");
+                    $.ajax({
+                        url: "@Url.Action("Delete")",
+                        type: 'post',
+                        data: { id: tournamentId },
+                            success: function () {
+                                target.closest("tr").remove();
+                            }
+                    });
+                });
+
+    });
+</script>

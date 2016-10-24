@@ -160,11 +160,15 @@
     <Compile Include="Models\Referee\DetailsModel.cs" />
     <Compile Include="Models\Referee\ListModel.cs" />
     <Compile Include="Models\Referee\MatchListModel.cs" />
+    <Compile Include="Models\Team\EditModel.cs" />
+    <Compile Include="Models\Team\CreateModel.cs" />
     <Compile Include="Models\Team\DetailsModel.cs" />
     <Compile Include="Models\Team\MatchListModel.cs" />
     <Compile Include="Models\Team\ListModel.cs" />
     <Compile Include="Models\Team\PlayerListModel.cs" />
+    <Compile Include="Models\Tournament\CreateModel.cs" />
     <Compile Include="Models\Tournament\DetailsModel.cs" />
+    <Compile Include="Models\Tournament\EditModel.cs" />
     <Compile Include="Models\Tournament\ListModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -240,6 +244,10 @@
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Players\Create.cshtml" />
     <Content Include="Views\Players\Edit.cshtml" />
+    <Content Include="Views\Teams\Create.cshtml" />
+    <Content Include="Views\Teams\Edit.cshtml" />
+    <Content Include="Views\Tournaments\Edit.cshtml" />
+    <Content Include="Views\Tournaments\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FootballStats.Common\FootballStats.Common.csproj">

@@ -21,8 +21,8 @@ namespace FootballStats.Web
 
             routes.MapRoute(
                 name: "TournamentDetails",
-                url: "Tournaments/{id}",
-                defaults: new {controller = "Tournaments", action = "Details"}
+                url: "Tournaments/{action}/{id}",
+                defaults: new {controller = "Tournaments", action = "Details", id = UrlParameter.Optional }
             );
 
             routes.MapRoute(
@@ -33,8 +33,8 @@ namespace FootballStats.Web
 
             routes.MapRoute(
                 name: "FootballMatchDetails",
-                url: "Tournaments/{tournamentId}/FootballMatches/{id}",
-                defaults: new { controller = "FootballMatches", action = "Details" }
+                url: "Tournaments/{tournamentId}/FootballMatches/{action}/{id}",
+                defaults: new { controller = "FootballMatches", action = "Details", id = UrlParameter.Optional }
             );
 
             routes.MapRoute(
@@ -45,8 +45,8 @@ namespace FootballStats.Web
 
             routes.MapRoute(
                 name: "TeamDetails",
-                url: "Teams/{id}",
-                defaults: new { controller = "Teams", action = "Details" }
+                url: "Teams/{action}/{id}",
+                defaults: new { controller = "Teams", action = "Details", id = UrlParameter.Optional }
             );
 
             routes.MapRoute(

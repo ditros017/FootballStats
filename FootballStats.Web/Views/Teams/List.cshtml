@@ -1,9 +1,12 @@
-﻿@model FootballStats.Web.Models.Team.ListModel
+﻿@using Microsoft.AspNet.Identity
+@model FootballStats.Web.Models.Team.ListModel
 @{
     ViewBag.Title = "Команды";
 }
 
 <h2>@ViewBag.Title</h2>
+
+@Html.ActionLink("Создать", "Create")
 
 <table class="table">
     <tr>
@@ -41,9 +44,40 @@
             <td>
                 @if (Request.IsAuthenticated)
                 {
-                    @Html.ActionLink("Выбрать", "Details", new { team.Id })
+                    @Html.ActionLink("Выбрать", "Details", new {team.Id})
+                    if (User.Identity.GetUserName() == "admin")
+                    {
+                        <text>
+                            |
+                        </text>
+                        @Html.ActionLink("Редактировать", "Edit", new {team.Id})
+                        <text>
+                            |
+                        </text>
+                        <a data-id="@team.Id" href="javascript:void(0)" class="delete">Удалить</a>
+                    }
                 }
             </td>
         </tr>
     }
 </table>
+
+<script>
+    $(function() {
+        $("a.delete")
+            .on("click",
+                function(event) {
+                    var target = $(event.target);
+                    var teamId = target.attr("data-id");
+                    $.ajax({
+                        url: "@Url.Action("Delete")",
+                        type: 'post',
+                        data: { id: teamId },
+                            success: function () {
+                                target.closest("tr").remove();
+                            }
+                    });
+                });
+
+    });
+</script>

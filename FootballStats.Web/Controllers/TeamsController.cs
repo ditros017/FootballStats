@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using FootballStats.Data.Infrastructure;
+using FootballStats.Domain;
 using FootballStats.Web.Models.Team;
 
 namespace FootballStats.Web.Controllers
@@ -114,6 +115,103 @@ namespace FootballStats.Web.Controllers
             }
 
             return PartialView("~/Views/Teams/Partials/MatchListModel.cshtml", model);
+        }
+
+        [HttpGet]
+        public ActionResult Create()
+        {
+            return View("~/Views/Teams/Create.cshtml", new CreateModel
+            {
+                Coaches = _unitOfWork.CoachRepository.GetAll(c => new SelectListItem
+                {
+                    Text = c.LastName + " " + c.FirstName,
+                    Value = c.Id.ToString()
+                }).ToArray()
+            });
+        }
+
+        [HttpPost]
+        public ActionResult Create(CreateModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                _unitOfWork.TeamRepository.Save(new Team
+                {
+                    Name = model.Name,
+                    Country = model.Country,
+                    City = model.City,
+                    CoachId = model.CoachId
+                });
+                _unitOfWork.Commit();
+
+                return RedirectToAction("List");
+            }
+
+            return View(new CreateModel
+            {
+                Coaches = _unitOfWork.TeamRepository.GetAll(t => new SelectListItem
+                {
+                    Text = t.Name,
+                    Value = t.Id.ToString()
+                }).ToArray()
+            });
+        }
+
+        [HttpPost]
+        public ActionResult Delete(int id)
+        {
+            _unitOfWork.TeamRepository.Delete(id);
+            _unitOfWork.Commit();
+
+            return Json(new { redirectToUrl = Url.Action("List") });
+        }
+
+        [HttpGet]
+        public ActionResult Edit(int id)
+        {
+            var model = _unitOfWork.TeamRepository.GetById(id, t => new EditModel
+            {
+                Id = t.Id,
+                Name = t.Name,
+                Country = t.Country,
+                City = t.City,
+                CoachId = t.CoachId
+            });
+
+            model.Coaches = _unitOfWork.CoachRepository.GetAll(c => new SelectListItem
+            {
+                Text = c.LastName + " " + c.FirstName,
+                Value = c.Id.ToString(),
+                Selected = c.Id == model.CoachId
+            }).ToArray();
+
+            return View("~/Views/Teams/Edit.cshtml", model);
+        }
+
+        [HttpPost]
+        public ActionResult Edit(EditModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var team = _unitOfWork.TeamRepository.GetById(model.Id);
+                team.Name = model.Name;
+                team.Country = model.Country;
+                team.City = model.City;
+                team.CoachId = model.CoachId;
+
+                _unitOfWork.TeamRepository.Save(team);
+                _unitOfWork.Commit();
+
+                return RedirectToAction("List");
+            }
+
+            model.Coaches = _unitOfWork.CoachRepository.GetAll(c => new SelectListItem
+            {
+                Text = c.LastName + " " + c.FirstName,
+                Value = c.Id.ToString()
+            }).ToArray();
+
+            return View(model);
         }
     }
 }
