@@ -181,12 +181,17 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Coach\EditModel.cs" />
+    <Compile Include="Models\Coach\CreateModel.cs" />
+    <Compile Include="Models\Coach\ListModel.cs" />
     <Compile Include="Models\Coach\DetailsModel.cs" />
     <Compile Include="Models\FootballMatch\DetailsModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Player\DetailsModel.cs" />
     <Compile Include="Models\Player\ListModel.cs" />
+    <Compile Include="Models\Referee\EditModel.cs" />
+    <Compile Include="Models\Referee\CreateModel.cs" />
     <Compile Include="Models\Referee\DetailsModel.cs" />
     <Compile Include="Models\Referee\ListModel.cs" />
     <Compile Include="Models\Referee\MatchListModel.cs" />
@@ -282,6 +287,11 @@
     <Content Include="Views\Referees\Details.cshtml" />
     <Content Include="Views\Referees\List.cshtml" />
     <Content Include="Views\Referees\Partials\MatchListModel.cshtml" />
+    <Content Include="Views\Referees\Create.cshtml" />
+    <Content Include="Views\Referees\Edit.cshtml" />
+    <Content Include="Views\Coaches\List.cshtml" />
+    <Content Include="Views\Coaches\Create.cshtml" />
+    <Content Include="Views\Coaches\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FootballStats.Common\FootballStats.Common.csproj">

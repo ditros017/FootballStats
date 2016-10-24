@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using FootballStats.Data.Infrastructure;
+using FootballStats.Domain;
 using FootballStats.Web.Models.Referee;
 
 namespace FootballStats.Web.Controllers
@@ -27,14 +29,14 @@ namespace FootballStats.Web.Controllers
 
         public ActionResult Details(int id)
         {
-            var model = _unitOfWork.RefereeRepository.GetById(id, p => new DetailsModel
+            var model = _unitOfWork.RefereeRepository.GetById(id, r => new DetailsModel
             {
-                Id = p.Id,
-                FirstName = p.FirstName,
-                LastName = p.LastName,
-                MiddleName = p.MiddleName,
-                DateOfBirth = p.DateOfBirth,
-                FootballMatchCount = p.FootballMatchReferees.Count
+                Id = r.Id,
+                FirstName = r.FirstName,
+                LastName = r.LastName,
+                MiddleName = r.MiddleName,
+                DateOfBirth = r.DateOfBirth,
+                FootballMatchCount = r.FootballMatchReferees.Count
             });
 
             return View("~/Views/Referees/Details.cshtml", model);
@@ -77,6 +79,78 @@ namespace FootballStats.Web.Controllers
             }
 
             return PartialView("~/Views/Referees/Partials/MatchListModel.cshtml", model);
+        }
+
+        [HttpGet]
+        public ActionResult Create()
+        {
+            return View("~/Views/Referees/Create.cshtml");
+        }
+
+        [HttpPost]
+        public ActionResult Create(CreateModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                _unitOfWork.RefereeRepository.Save(new Referee
+                {
+                    FirstName = model.FirstName,
+                    LastName = model.LastName,
+                    MiddleName = model.MiddleName,
+                    DateOfBirth = model.DateOfBirth,
+                    Type = model.Type
+                });
+                _unitOfWork.Commit();
+
+                return RedirectToAction("List");
+            }
+
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Delete(int id)
+        {
+            _unitOfWork.RefereeRepository.Delete(id);
+            _unitOfWork.Commit();
+
+            return Json(new { redirectToUrl = Url.Action("List") });
+        }
+
+        [HttpGet]
+        public ActionResult Edit(int id)
+        {
+            var model = _unitOfWork.RefereeRepository.GetById(id, r => new EditModel
+            {
+                Id = r.Id,
+                FirstName = r.FirstName,
+                LastName = r.LastName,
+                MiddleName = r.MiddleName,
+                DateOfBirth = r.DateOfBirth
+            });
+
+            return View("~/Views/Referees/Edit.cshtml", model);
+        }
+
+        [HttpPost]
+        public ActionResult Edit(EditModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var referee = _unitOfWork.RefereeRepository.GetById(model.Id);
+                referee.FirstName = model.FirstName;
+                referee.LastName = model.LastName;
+                referee.MiddleName = model.MiddleName;
+                referee.DateOfBirth = model.DateOfBirth;
+                referee.Type = model.Type;
+
+                _unitOfWork.RefereeRepository.Save(referee);
+                _unitOfWork.Commit();
+
+                return RedirectToAction("List");
+            }
+
+            return View();
         }
     }
 }

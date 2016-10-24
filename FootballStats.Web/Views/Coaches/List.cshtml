@@ -1,6 +1,6 @@
-﻿@model FootballStats.Web.Models.Referee.ListModel
+﻿@model FootballStats.Web.Models.Coach.ListModel
 @{
-    ViewBag.Title = "Судьи";
+    ViewBag.Title = "Тренеры";
 }
 
 <h2>@ViewBag.Title</h2>
@@ -13,25 +13,19 @@
             ФИО
         </th>
         <th>
-            Тип
-        </th>
-        <th>
         </th>
     </tr>
 
-    @foreach (var referee in Model.Referees)
+    @foreach (var coach in Model.Coaches)
     {
         <tr>
             <td>
-                @referee.Name
+                @coach.Name
             </td>
             <td>
-                @referee.Type
-            </td>
-            <td>
-                @Html.ActionLink("Выбрать", "Details", new {referee.Id})
-                @Html.ActionLink("Редактировать", "Edit", new { referee.Id })
-                <a data-id="@referee.Id" href="javascript:void(0)" class="delete">Удалить</a>
+                @Html.ActionLink("Выбрать", "Details", new {coach.Id})
+                @Html.ActionLink("Редактировать", "Edit", new { coach.Id })
+                <a data-id="@coach.Id" href="javascript:void(0)" class="delete">Удалить</a>
             </td>
         </tr>
     }
@@ -43,11 +37,11 @@
             .on("click",
                 function(event) {
                     var target = $(event.target);
-                    var refereeId = target.attr("data-id");
+                    var coachId = target.attr("data-id");
                     $.ajax({
                         url: "@Url.Action("Delete")",
                         type: 'post',
-                        data: { id: refereeId },
+                        data: { id: coachId },
                             success: function () {
                                 target.closest("tr").remove();
                             }
