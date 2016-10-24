@@ -27,20 +27,10 @@
                 @tournament.FootballMatchCount
             </td>
             <td>
-                @Html.ActionLink("Выбрать", "Details", new {tournament.Id})
-                @if (User.IsInRole("admin"))
+                @if (Request.IsAuthenticated)
                 {
-                    <span>
-                            @*@Html.ActionLink("Edit", "Edit", new { id = tournament.Tariff_Code }) |
-                                @Html.ActionLink("Delete", "Delete", new { id = tournament.Tariff_Code })*@
-                        </span>
-                }@*@Ajax.ActionLink("Список опций",
-                        "GetOptions", new { id = tournament.Tariff_Code }, new AjaxOptions
-                        {
-                            UpdateTargetId = "tariffOptions",
-                            InsertionMode = InsertionMode.Replace,
-                            HttpMethod = "GET"
-                        })*@
+                    @Html.ActionLink("Выбрать", "Details", new { tournament.Id })
+                }
             </td>
         </tr>
     }

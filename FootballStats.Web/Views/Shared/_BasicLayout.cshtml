@@ -21,14 +21,11 @@
                 @Html.ActionLink("FootballStats", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
-                @if (Request.IsAuthenticated)
-                {
-                    <ul class="nav navbar-nav">
-                        <li>@Html.ActionLink("Турниры", "List", "Tournaments")</li>
-                        <li>@Html.ActionLink("Команды", "List", "Teams")</li>
-                        <li>@Html.ActionLink("Игроки", "List", "Players")</li>
-                    </ul>
-                }
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Турниры", "List", "Tournaments")</li>
+                    <li>@Html.ActionLink("Команды", "List", "Teams")</li>
+                    <li>@Html.ActionLink("Игроки", "List", "Players")</li>
+                </ul>
                 
                 @Html.Partial("_LoginPartial")
             </div>

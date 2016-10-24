@@ -1,10 +1,10 @@
-﻿@using FootballStats.Domain
+﻿@using Microsoft.AspNet.Identity
 @{
     Layout = "~/Views/Shared/_BasicLayout.cshtml";
 }
 
 <div class="row">
-    @if (User.IsInRole(UserRole.Admin.ToString()))
+    @if (User.Identity.GetUserName() == "admin")
     {
         <div class="col-xs-2">
             <ul class="nav nav-sidebar">

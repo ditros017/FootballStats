@@ -28,7 +28,7 @@ namespace FootballStats.Web.Controllers
                 if (user != null)
                 {
                     FormsAuthentication.SetAuthCookie(model.Name, true);
-                    Roles.AddUserToRole(user.Name, user.Role.ToString());
+                    //Roles.AddUserToRole(user.Name, user.Role.ToString());
 
                     return RedirectToAction("Index", "Home");
                 }
@@ -57,7 +57,7 @@ namespace FootballStats.Web.Controllers
                     _unitOfWork.Commit();
 
                     FormsAuthentication.SetAuthCookie(model.Name, true);
-                    Roles.AddUserToRole(model.Name, UserRole.None.ToString());
+                    //Roles.AddUserToRole(model.Name, UserRole.None.ToString());
 
                     return RedirectToAction("Index", "Home");
                 }
