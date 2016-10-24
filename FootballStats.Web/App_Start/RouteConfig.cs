@@ -38,18 +38,6 @@ namespace FootballStats.Web
             );
 
             routes.MapRoute(
-                name: "PlayerList",
-                url: "Players",
-                defaults: new { controller = "Players", action = "List" }
-            );
-
-            routes.MapRoute(
-                name: "PlayerDetails",
-                url: "Players/{id}",
-                defaults: new { controller = "Players", action = "Details" }
-            );
-
-            routes.MapRoute(
                 name: "TeamList",
                 url: "Teams",
                 defaults: new { controller = "Teams", action = "List" }
@@ -59,6 +47,18 @@ namespace FootballStats.Web
                 name: "TeamDetails",
                 url: "Teams/{id}",
                 defaults: new { controller = "Teams", action = "Details" }
+            );
+
+            routes.MapRoute(
+                name: "PlayerList",
+                url: "Players",
+                defaults: new { controller = "Players", action = "List" }
+            );
+
+            routes.MapRoute(
+                name: "PlayerDetails",
+                url: "Players/{action}/{id}",
+                defaults: new { controller = "Players", action = "Details", id = UrlParameter.Optional }
             );
 
             routes.MapRoute(
